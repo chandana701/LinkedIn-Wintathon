@@ -5,17 +5,17 @@ import { PropTypes } from "prop-types";
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
+  // Button,
+  // Card,
+  // CardHeader,
+  // CardBody,
+  // CardTitle,
   Collapse,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  FormGroup,
+  // FormGroup,
   Form,
   Input,
   InputGroupAddon,
@@ -27,14 +27,14 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
+  // Progress,
+  // Table,
   Container,
   Row,
   Col
 } from "reactstrap";
 
-var ps;
+// var ps;
 
 class Sidebar extends React.Component {
   state = {
@@ -79,7 +79,7 @@ class Sidebar extends React.Component {
     });
   };
   render() {
-    const { bgColor, routes, logo } = this.props;
+    const {  routes, logo } = this.props;
     let navbarBrandProps;
     if (logo && logo.innerLink) {
       navbarBrandProps = {
@@ -140,7 +140,7 @@ class Sidebar extends React.Component {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={require("assets/img/theme/team-1-800x800.jpg")}
+                      src={require("../../assets/img/theme/team-1-800x800.jpg")}
                     />
                   </span>
                 </Media>
