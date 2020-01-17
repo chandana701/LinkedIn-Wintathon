@@ -18,7 +18,11 @@
 import React from "react";
 
 // reactstrap components
-import { Button, Container, Row, Col } from "reactstrap";
+import {
+  //  Button,
+  Container,
+  // Row, Col 
+} from "reactstrap";
 
 class UserHeader extends React.Component {
   render() {
@@ -27,7 +31,7 @@ class UserHeader extends React.Component {
         <div
           className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
           style={{
-            minHeight: "600px",
+            minHeight: "200px",
             backgroundImage:
               "url(" + require("../../assets/img/theme/profile-cover.jpg") + ")",
             backgroundSize: "cover",
@@ -38,7 +42,7 @@ class UserHeader extends React.Component {
           <span className="mask bg-gradient-default opacity-8" />
           {/* Header container */}
           <Container className="d-flex align-items-center" fluid>
-            <Row>
+            {/* <Row>
               <Col lg="7" md="10">
                 <h1 className="display-2 text-white">Hello Jesse</h1>
                 <p className="text-white mt-0 mb-5">
@@ -53,7 +57,7 @@ class UserHeader extends React.Component {
                   Edit profile
                 </Button>
               </Col>
-            </Row>
+            </Row> */}
           </Container>
         </div>
       </>

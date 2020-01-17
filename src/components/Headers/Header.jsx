@@ -18,7 +18,11 @@
 import React from "react";
 
 // reactstrap components
-import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import {
+  Card,
+  // CardBody, CardTitle,
+  Container, Row, Col
+} from "reactstrap";
 
 class Header extends React.Component {
   render() {
@@ -31,7 +35,7 @@ class Header extends React.Component {
               <Row>
                 <Col lg="6" xl="3">
                   <Card className="card-stats mb-4 mb-xl-0">
-                    <CardBody>
+                    {/* <CardBody>
                       <Row>
                         <div className="col">
                           <CardTitle
@@ -144,7 +148,7 @@ class Header extends React.Component {
                         </span>{" "}
                         <span className="text-nowrap">Since last month</span>
                       </p>
-                    </CardBody>
+                    </CardBody> */}
                   </Card>
                 </Col>
               </Row>

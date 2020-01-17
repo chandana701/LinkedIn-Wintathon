@@ -3,7 +3,9 @@ import Profile from "./views/examples/Profile.jsx";
 import Maps from "./views/examples/Maps.jsx";
 import Register from "./views/examples/Register.jsx";
 import Login from "./views/examples/Login.jsx";
+import Projects from "./views/examples/Projects.jsx";
 import Tables from "./views/examples/Tables.jsx";
+import ProfileComparision from "./views/examples/ProfileComparision.jsx";
 import Icons from "./views/examples/Icons.jsx";
 
 var routes = [
@@ -40,6 +42,20 @@ var routes = [
     name: "Tables",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
+    layout: "/admin"
+  },
+  {
+    path: "/ProfileComparision",
+    name: "ProfileComparision",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: ProfileComparision,
+    layout: "/admin"
+  },
+  {
+    path: "/projects",
+    name: "Projects",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: Projects,
     layout: "/admin"
   },
   {
