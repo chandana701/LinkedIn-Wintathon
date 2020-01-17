@@ -13,6 +13,7 @@ import {
   // UncontrolledTooltip
 } from "reactstrap";
 // import Header from "../../components/Headers/Header.jsx";
+import hello from "../../assets/api.js"
 
 class Tables extends React.Component {
   constructor(props) {
@@ -21,6 +22,12 @@ class Tables extends React.Component {
       metric: []
     }
   }
+  componentDidMount = () => {
+    hello().then(response => {
+      console.log(response)
+    })
+  }
+
 
   addMetric = () => {
     const met = {
