@@ -118,7 +118,7 @@ class Profile extends React.Component {
                     <Col xs="2" mr="1">
                       <Button
                         color="primary"
-                        href={"/admin/projects?userName=" + this.state.userName}
+                        href={"/admin/index?userName=" + this.state.userName}
 
                         size="sm"
                       >
@@ -129,7 +129,7 @@ class Profile extends React.Component {
                     <Col xs="2" mr="1">
                       <Button
                         color="primary"
-                        href={"/admin/index?userName=" + this.state.userName}
+                        href={"/admin/detailView?userName=" + this.state.userName}
                         size="sm"
                       >
                         DetailView
