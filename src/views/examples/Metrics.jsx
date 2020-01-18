@@ -66,7 +66,7 @@ class Tables extends React.Component {
     }
   }
 
-  buildmetric = (obj) => {
+  buildmetric = (obj, bool) => {
     const Entry = (
       <tr>
         <td>{obj["name"]}</td>
@@ -209,7 +209,7 @@ class Tables extends React.Component {
 
                     {
                       Object.values(this.state.data["general"]).map((obj, index) => {
-                        return this.buildmetric(obj)
+                        return this.buildmetric(obj, false)
                       })
                     }
 
@@ -218,7 +218,7 @@ class Tables extends React.Component {
                     </tr>
                     {
                       Object.values(this.state.data["tech"]).map((obj, index) => {
-                        return this.buildmetric(obj)
+                        return this.buildmetric(obj, true)
                       })
                     }
                     <tr>
@@ -227,7 +227,7 @@ class Tables extends React.Component {
 
                     {
                       Object.values(this.state.data["other"]).map((obj, index) => {
-                        return this.buildmetric(obj)
+                        return this.buildmetric(obj, false)
                       })
                     }
 
