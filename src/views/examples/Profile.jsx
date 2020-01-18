@@ -86,8 +86,8 @@ class Profile extends React.Component {
                     </Button>
                   </div>
                 </CardHeader>
-                <CardBody className="pt-0 pt-md-4">
-                  <div className="text-center">
+                <CardBody className="pt-10 pt-md-4">
+                  <div className="text-center" style={{ paddingTop: "30px" }}>
                     <h3>
                       {this.state.userName}
                       <span className="font-weight-light">, 27</span>
@@ -122,7 +122,7 @@ class Profile extends React.Component {
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="4">
-                      <h3 className="mb-0">My account</h3>
+                      <h3 className="mb-0">User Profile</h3>
                     </Col>
                     <Col xs="2" mr="1">
                       <Button
@@ -160,60 +160,54 @@ class Profile extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Form>
-                    <h6 className="heading-small text-muted mb-4">
-                      User information
-                    </h6>
+
                     <div className="pl-lg-4">
                       <div className='title'>
-                        <i className='fa fa-graduation-cap'></i>
-                        <h2>EDUCATION</h2>
                         <div>
-                          <div className='item' >
-                            <h3>edu.degree @ du.institution <span>2017 - 2019</span></h3>
-                            <p>edu.description</p>
-                          </div>
 
-                          <div className='item' >
-                            <h3>edu.degree @ du.institution <span>2017 - 2019</span></h3>
-                            <p>edu.description</p>
-                          </div>
+                          <i className='fa fa-graduation-cap' style={{ float: "left", paddingTop: "7px", paddingRight: "20px" }} ></i>
+                          <h2 style={{ color: "#0177b5" }}>EDUCATION</h2>
                         </div>
-                      </div>
 
-
-                      <div className='title'>
-                        <i className='fa fa-graduation-cap'></i>
-                        <h2>Projects</h2>
                         <div>
                           <div className='item' >
-                            <h3>edu.degree @ du.institution <span>2017 - 2019</span></h3>
-                            <p>edu.description</p>
-                          </div>
-
-                          <div className='item' >
-                            <h3>edu.degree @ du.institution <span>2017 - 2019</span></h3>
-                            <p>edu.description</p>
+                            <h3>Indian Institute Of Technology <span >2010 - 2014</span></h3>
+                            <p>UnderGraduate Degree in Computer Science</p>
                           </div>
                         </div>
                       </div>
 
                       <div className='title'>
-                        <i className='fa fa-graduation-cap'></i>
-                        <h2>Experience</h2>
+                        <i className='fa fa-suitcase' style={{ float: "left", paddingTop: "7px", paddingRight: "20px" }}></i>
+                        <h2 style={{ color: "#0177b5" }}>Experience</h2>
                         <div>
                           <div className='item' >
-                            <h3>edu.degree @ du.institution <span>2017 - 2019</span></h3>
-                            <p>edu.description</p>
+                            <h3>LinkedIn <span>2017 - Current</span></h3>
+                            <p>Currently working as a Product Manager .Developing a product called RecruitIn to help the recruiters to gain overall knowledge about the candidate</p>
                           </div>
 
                           <div className='item' >
-                            <h3>edu.degree @ du.institution <span>2017 - 2019</span></h3>
-                            <p>edu.description</p>
+                            <h3>Microsoft <span>2014 - 2017</span></h3>
+                            <p>Worked as Software Developer .Worked on Microsoft project management tool</p>
                           </div>
                         </div>
                       </div>
 
+                      <div className='title'>
+                        <i className='fa fa-book' style={{ float: "left", paddingTop: "7px", paddingRight: "20px" }}></i>
+                        <h2 style={{ color: "#0177b5" }}>Projects</h2>
+                        <div>
+                          <div className='item' >
+                            <h3>RecruitIn   <span>2019 - 2020</span></h3>
+                            <p>RecruitIn helps recruiters to view the detail infomation of Applicant from both his likedin profile and github page</p>
+                          </div>
 
+                          <div className='item' >
+                            <h3>LinkedIn Wintathon  <span>2018 - 2019</span></h3>
+                            <p>Developed a User recommendation engine to help a user who is in search of jobs</p>
+                          </div>
+                        </div>
+                      </div>
 
 
                     </div>

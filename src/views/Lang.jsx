@@ -69,7 +69,7 @@ class App extends React.Component {
             dataSource: {
                 // Chart Configuration
                 chart: {
-                    caption: "Market Share of Web Servers",
+                    caption: "Technology Statistics",
                     plottooltext: "<b>$percentValue</b> of web servers run on $label servers",
                     showlegend: "1",
                     showpercentvalues: "1",

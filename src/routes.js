@@ -41,7 +41,7 @@ var routes = [
   },
   {
     path: "/ProfileComparision",
-    name: "ProfileComparision",
+    name: "Profiles",
     icon: "ni ni-bullet-list-67 text-red",
     component: ProfileComparision,
     layout: "/admin"

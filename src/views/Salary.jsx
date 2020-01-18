@@ -30,9 +30,9 @@ class App extends React.Component {
             dataSource: {
                 chart: {
                     caption: "Salary Graph",
-                    subCaption: "In MMbbl = One Million barrels",
-                    xAxisName: "Country",
-                    yAxisName: "Reserves (MMbbl)",
+                    subCaption: "",
+                    xAxisName: "Year",
+                    yAxisName: "Salary",
                     theme: "fusion"
                 },
                 // Chart Data

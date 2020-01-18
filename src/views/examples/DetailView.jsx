@@ -190,7 +190,7 @@ class Tables extends React.Component {
             <div className="col">
               <Card className="shadow">
                 <CardHeader className="border-0">
-                  <h3 className="mb-0">Card tables</h3>
+                  <h3 className="mb-0">Detail Info</h3>
                   <table align='right'>
                     <tr>
                       <td><input type="text" placeholder="Compare..." style={{ padding: "6px 15px", border: "2px solid #1D9ED3", borderRadius: "10px" }} value={this.state.compareValue} onChange={this.addTostate}></input></td>
