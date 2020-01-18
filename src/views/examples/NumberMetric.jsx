@@ -13,44 +13,27 @@ import {
   // UncontrolledTooltip
 } from "reactstrap";
 // import Header from "../../components/Headers/Header.jsx";
-import hello from "../../assets/api.js"
+
 
 class Tables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      metric: []
+
     }
   }
-  componentDidMount = () => {
-    hello().then(response => {
-      console.log(response)
-    })
-  }
+  // componentDidMount = () => {
+  //   console.log(this.props.metric)
+  //   getMetric().then(response => {
+  //     console.log(response)
+  //     this.setState({
+  //       data: response.data,
+  //       metric: response.data[this.props.metric]["data"]
+  //     })
+  //   })
 
+  // }
 
-  addMetric = () => {
-    const met = {
-      'from': null,
-      "to": null,
-      "value": null
-    }
-    const intialMetric = this.state.metric
-    intialMetric.push(met)
-    this.setState({
-      metric: intialMetric
-    })
-    console.log(intialMetric)
-  }
-  addToState = (event) => {
-    console.log(event.target.name, event.target.value, event.target.id)
-    const intialMetric = this.state.metric
-    intialMetric[event.target.name][event.target.id] = event.target.value
-    this.setState({
-      metric: intialMetric
-    })
-    console.log(intialMetric)
-  }
 
   showEntry = (metricObject, index) => {
 
@@ -65,7 +48,7 @@ class Tables extends React.Component {
               placeholder="from"
               type="number"
               style={{ width: "80px", height: "40px" }}
-              onChange={this.addToState}
+              onChange={this.props.addToStateNumber}
               value={metricObject["from"]}
             />
           </FormGroup>
@@ -79,7 +62,7 @@ class Tables extends React.Component {
               placeholder="to"
               type="number"
               style={{ width: "80px", height: "40px" }}
-              onChange={this.addToState}
+              onChange={this.props.addToStateNumber}
               value={metricObject["to"]}
             />
           </FormGroup>
@@ -93,7 +76,7 @@ class Tables extends React.Component {
               placeholder="value"
               type="number"
               style={{ width: "80px", height: "40px" }}
-              onChange={this.addToState}
+              onChange={this.props.addToStateNumber}
               value={metricObject["value"]}
             />
           </FormGroup>
@@ -120,7 +103,7 @@ class Tables extends React.Component {
                   <h3 className="mb-0">Metric Values</h3>
                   <img
                     alt="..."
-                    onClick={this.addMetric}
+                    onClick={this.props.addNumberMetric}
                     src={require("../../assets/img/theme/pie.png")}
                     style={{ width: "20px", height: "20px" }}
                   />
@@ -135,9 +118,9 @@ class Tables extends React.Component {
                   </thead>
                   <tbody>
                     {
-                      Object.values(this.state.metric).map((obj, index) => {
+                      this.props.metricValue != null ? Object.values(this.props.metricValue).map((obj, index) => {
                         return this.showEntry(obj, index)
-                      })
+                      }) : ""
                     }
 
                   </tbody>
@@ -151,7 +134,7 @@ class Tables extends React.Component {
 
 
         <Row className="align-items-left" style={{ paddingTop: "15px" }}>
-          <Col xs="2" >
+          {/* <Col xs="2" >
             <Button
               color="primary"
               size="sm"
@@ -159,13 +142,14 @@ class Tables extends React.Component {
             >
               Cancel
             </Button>
-          </Col>
+          </Col> */}
 
           <Col xs="2" >
             <Button
               color="primary"
               size="sm"
               style={{ marginLeft: "100px" }}
+              onClick={this.props.saveMetric}
             >
               Save
             </Button>

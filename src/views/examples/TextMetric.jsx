@@ -1,5 +1,4 @@
 import React from "react";
-import { Modal, ModalBody, ModalHeader } from "shards-react";
 // reactstrap components
 import {
   // Badge,
@@ -25,8 +24,6 @@ import {
 // core components
 // import Header from "../../components/Headers/Header.jsx";
 
-import FusionChart from "../Lang"
-
 class Tables extends React.Component {
   constructor(props) {
     super(props);
@@ -34,24 +31,34 @@ class Tables extends React.Component {
       open: false
     }
   }
-  changeState = () => {
-    this.setState({
-      open: !this.state.open
-    })
-  }
 
+  showEntry = (key, index) => {
+
+    const Entry = (
+      <tr>
+        <td>Tier 1</td>
+        <td>
+          <FormGroup>
+            <Input
+              className="form-control-alternative"
+              id="value"
+              placeholder="value"
+              type="number"
+              name={key}
+              onChange={this.props.addToStateText}
+              style={{ width: "100px", height: "40px" }}
+              value={this.props.metricValue[key]}
+            />
+          </FormGroup>
+        </td>
+      </tr>
+    )
+    return Entry
+  }
 
   render() {
     return (
       <>
-
-        <Modal open={this.state.open} toggle={this.changeState}>
-          <ModalHeader>Statistics</ModalHeader>
-          <ModalBody>
-            <FusionChart />
-          </ModalBody>
-        </Modal>
-
 
         {/* Page content */}
         <Container className="" fluid>
@@ -71,53 +78,11 @@ class Tables extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Tier 1</td>
-                      <td>
-                        <FormGroup>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            placeholder="value"
-                            type="number"
-                            style={{ width: "100px", height: "40px" }}
-                          />
-                        </FormGroup>
-
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Tier 2</td>
-                      <td>
-                        <FormGroup>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            placeholder="value"
-                            type="number"
-                            style={{ width: "100px", height: "40px" }}
-                          />
-                        </FormGroup>
-
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Tier 3</td>
-                      <td>
-                        <FormGroup>
-                          <Input
-                            className="form-control-alternative"
-                            id="input-postal-code"
-                            placeholder="value"
-                            type="number"
-                            style={{ width: "100px", height: "40px" }}
-                          />
-                        </FormGroup>
-
-                      </td>
-                    </tr>
+                    {
+                      this.props.metricValue != null ? Object.keys(this.props.metricValue).map((key, index) => {
+                        return this.showEntry(key, index)
+                      }) : ""
+                    }
 
                   </tbody>
                 </Table>

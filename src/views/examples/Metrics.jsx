@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 // core components
 import Header from "../../components/Headers/Header.jsx";
-
+import { getMetric, saveMetric } from "../../assets/api.ts"
 import NumberMetric from "./NumberMetric"
 import TextMetric from "./TextMetric"
 
@@ -22,7 +22,9 @@ class Tables extends React.Component {
     this.state = {
       openText: false,
       openNumber: false,
-      metric: "",
+      metricName: "",
+      metricValue: [],
+      metricData: null,
       data: {
         general: [
           {
@@ -63,11 +65,6 @@ class Tables extends React.Component {
       }
     }
   }
-  changeState = () => {
-    this.setState({
-      open: !this.state.open
-    })
-  }
 
   buildmetric = (obj) => {
     const Entry = (
@@ -88,19 +85,81 @@ class Tables extends React.Component {
   }
 
 
+  componentDidMount = () => {
+    console.log(this.props.metric)
+    getMetric().then(response => {
+      console.log(response)
+      this.setState({
+        metricData: response.data,
+      })
+    })
+
+  }
+
   toggleText = (event) => {
     console.log(event !== undefined ? event.target.name : "")
     this.setState({
       openText: !this.state.openText,
-      metric: event !== undefined ? event.target.name : ""
+      metricName: event !== undefined ? event.target.name : "",
+      metricValue: event !== undefined ? this.state.metricData[event.target.name]["data"] : null
     });
   }
   toggleNumber = (event) => {
     console.log(event !== undefined ? event.target.name : "")
     this.setState({
       openNumber: !this.state.openNumber,
-      metric: event !== undefined ? event.target.name : ""
+      metricName: event !== undefined ? event.target.name : "",
+      metricValue: event !== undefined ? this.state.metricData[event.target.name]["data"] : null
     });
+  }
+
+
+  addNumberMetric = () => {
+    const met = {
+      'from': null,
+      "to": null,
+      "value": null
+    }
+    const intialMetric = this.state.metricValue
+    intialMetric.push(met)
+    this.setState({
+      metricValue: intialMetric
+    })
+    console.log(intialMetric)
+  }
+  addToStateNumber = (event) => {
+    console.log(event.target.name, event.target.value, event.target.id)
+    const intialMetric = this.state.metricValue
+    intialMetric[event.target.name][event.target.id] = event.target.value
+    this.setState({
+      metricValue: intialMetric
+    })
+    console.log(intialMetric)
+  }
+
+  addToStateText = (event) => {
+    console.log(event.target.name, event.target.value, event.target.id)
+    const intialMetric = this.state.metricValue
+    intialMetric[event.target.name] = event.target.value
+    this.setState({
+      metricValue: intialMetric
+    })
+    console.log(intialMetric)
+  }
+
+  saveMetric = () => {
+    const intailData = this.state.metricData
+    intailData[this.state.metricName]["data"] = this.state.metricValue
+    this.setState({
+      metricData: intailData,
+      openNumber: false,
+      openText: false,
+    })
+
+    saveMetric(this.state.metricData).then(response => {
+      console.log(response)
+    })
+
   }
 
   render() {
@@ -110,14 +169,25 @@ class Tables extends React.Component {
         <Modal open={this.state.openNumber} toggle={this.toggleNumber}>
           <ModalHeader>Statistics</ModalHeader>
           <ModalBody>
-            <NumberMetric />
+            <NumberMetric
+              metric={this.state.metricName}
+              metricValue={this.state.metricValue}
+              addNumberMetric={this.addNumberMetric}
+              addToStateNumber={this.addToStateNumber}
+              saveMetric={this.saveMetric}
+            ></NumberMetric>
           </ModalBody>
         </Modal>
 
         <Modal open={this.state.openText} toggle={this.toggleText}>
           <ModalHeader>Statistics</ModalHeader>
           <ModalBody>
-            <TextMetric />
+            <TextMetric
+              metric={this.state.metricName}
+              metricValue={this.state.metricValue}
+              addToStateText={this.addToStateText}
+              saveMetric={this.saveMetric}
+            />
           </ModalBody>
         </Modal>
 
