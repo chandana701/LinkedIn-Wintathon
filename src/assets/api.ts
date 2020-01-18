@@ -24,7 +24,7 @@ export async function getMetric() {
     return responseJson;
 }
 
-export async function saveMetric(data) {
+export async function saveMetric(data: any) {
 
     const requestOptions = {
         method: 'POST',
@@ -39,7 +39,7 @@ export async function saveMetric(data) {
     return responseJson;
 }
 
-export async function getUser(userName) {
+export async function getUser(userName: any) {
 
     const requestOptions = {
         method: 'POST',
@@ -54,8 +54,8 @@ export async function getUser(userName) {
     return responseJson;
 }
 
-function handleResponse(response) {
-    return response.text().then((text) => {
+function handleResponse(response: any) {
+    return response.text().then((text: any) => {
         console.log(text)
         const data = text && JSON.parse(text);
         data.ok = response.ok

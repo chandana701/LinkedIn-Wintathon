@@ -23,6 +23,7 @@ class Tables extends React.Component {
       profileData: [],
       userName: "",
       compareValue: "",
+      modalOpen: false,
       data: {
         "general": [
           {
@@ -154,12 +155,25 @@ class Tables extends React.Component {
     return res
 
   }
+  toggleModal = () => {
+    this.setState({
+      modalOpen: !this.state.modalOpen
+    })
+  }
 
 
   render() {
 
     return (
       <>
+
+        {/* <ModalGateway>
+          {this.state.modalOpen ? (
+            <Modal onClose={this.toggleModal}>
+              <Carousel views={images} />
+            </Modal>
+          ) : null}
+        </ModalGateway> */}
 
 
         <Header />
