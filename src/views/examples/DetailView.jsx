@@ -3,10 +3,6 @@ import React from "react";
 import {
   Card,
   CardHeader,
-  CardFooter,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Table,
   Container,
   Row,

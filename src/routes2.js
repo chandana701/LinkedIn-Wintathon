@@ -1,12 +1,12 @@
-import Index from "./views/Index.jsx";
-import Profile from "./views/examples/Profile.jsx";
-import Maps from "./views/examples/Maps.jsx";
+// import Index from "./views/Index.jsx";
+// import Profile from "./views/examples/Profile.jsx";
+// import Maps from "./views/examples/Maps.jsx";
+// import Projects from "./views/examples/Projects.jsx";
+// import Tables from "./views/examples/Tables.jsx";
+// import DetailView from "./views/examples/DetailView.jsx";
 import Register from "./views/examples/Register.jsx";
 import Login from "./views/examples/Login.jsx";
-import Projects from "./views/examples/Projects.jsx";
-import Tables from "./views/examples/Tables.jsx";
 import ProfileComparision from "./views/examples/ProfileComparision.jsx";
-import DetailView from "./views/examples/DetailView.jsx";
 import Metrics from "./views/examples/Metrics.jsx";
 
 var routes = [

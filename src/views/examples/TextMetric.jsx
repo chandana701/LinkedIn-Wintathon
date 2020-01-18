@@ -34,9 +34,11 @@ class Tables extends React.Component {
 
   showEntry = (key, index) => {
 
+
+    console.log(this.props.metricValue)
     const Entry = (
       <tr>
-        <td>Tier 1</td>
+        <td>{key}</td>
         <td>
           <FormGroup>
             <Input

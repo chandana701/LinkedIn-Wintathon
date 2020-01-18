@@ -38,11 +38,6 @@ class Tables extends React.Component {
             "type": "text"
           },
           {
-            "name": "Designation",
-            "index": "designation",
-            "type": "text"
-          },
-          {
             "name": "Current Salary",
             "index": "salary",
             "type": "number"
@@ -119,6 +114,7 @@ class Tables extends React.Component {
 
   toggleText = (event) => {
     console.log(event !== undefined ? event.target.name : "")
+    console.log(this.state.metricData)
     this.setState({
       openText: !this.state.openText,
       metricName: event !== undefined ? event.target.name : "",
