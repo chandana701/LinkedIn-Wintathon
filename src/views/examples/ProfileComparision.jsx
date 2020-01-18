@@ -73,7 +73,7 @@ class Tables extends React.Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href={"/admin/user-profile?userName=Hemanth"}>Hemanth</a></td>
+                      <td><a href={"/admin/user-profile?userName=Mounika"}>Mounika</a></td>
                       <th scope="row">
                         <img
                           alt="..."

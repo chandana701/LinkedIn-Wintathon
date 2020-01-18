@@ -1,0 +1,63 @@
+{
+        "general": [
+          {
+            "name": "Name",
+            "index": "name",
+            "type": "text"
+          },
+          {
+            "name": "Company",
+            "index": "company",
+            "type": "text"
+          },
+          {
+            "name": "Collage",
+            "index": "collage",
+            "type": "text"
+          },
+          {
+            "name": "Designation",
+            "index": "designation",
+            "type": "text"
+          },
+          {
+            "name": "Current Salary",
+            "index": "salary",
+            "type": "number"
+          }
+        ],
+        "tech": [
+          {
+            "name": "Java",
+            "index": "java",
+            "type": "number"
+          },
+          {
+            "name": "Python",
+            "index": "python",
+            "type": "number"
+          },
+          {
+            "name": "SQL",
+            "index": "sql",
+            "type": "number"
+          },
+        ],
+        "other": [
+          {
+            "name": "Projects",
+            "index": "projects",
+            "type": "number"
+          },
+          {
+            "name": "References",
+            "index": "references",
+            "type": "number"
+          },
+          {
+            "name": "Certifications",
+            "index": "certifications",
+            "type": "number"
+          }
+        ]
+}

@@ -26,10 +26,25 @@ class Tables extends React.Component {
       metricValue: [],
       metricData: null,
       data: {
-        general: [
+        "general": [
+          {
+            "name": "Name",
+            "index": "name",
+            "type": "text"
+          },
+          {
+            "name": "Company",
+            "index": "company",
+            "type": "text"
+          },
           {
             "name": "Collage",
             "index": "collage",
+            "type": "text"
+          },
+          {
+            "name": "Designation",
+            "index": "designation",
             "type": "text"
           },
           {
@@ -38,31 +53,42 @@ class Tables extends React.Component {
             "type": "number"
           }
         ],
-        tech: [
+        "tech": [
           {
-            "name": "Collage",
-            "index": "collage",
-            "type": "text"
-          },
-          {
-            "name": "Current Salary",
-            "index": "salary",
+            "name": "Java",
+            "index": "java",
             "type": "number"
-          }
-        ],
-        other: [
-          {
-            "name": "Collage",
-            "index": "collage",
-            "type": "text"
           },
           {
-            "name": "Current Salary",
-            "index": "salary",
+            "name": "Python",
+            "index": "python",
+            "type": "number"
+          },
+          {
+            "name": "SQL",
+            "index": "sql",
+            "type": "number"
+          },
+        ],
+        "other": [
+          {
+            "name": "Projects",
+            "index": "projects",
+            "type": "number"
+          },
+          {
+            "name": "References",
+            "index": "references",
+            "type": "number"
+          },
+          {
+            "name": "Certifications",
+            "index": "certifications",
             "type": "number"
           }
         ]
       }
+
     }
   }
 

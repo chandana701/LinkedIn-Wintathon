@@ -39,7 +39,20 @@ export async function saveMetric(data) {
     return responseJson;
 }
 
+export async function getUser(userName) {
 
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "userName": userName }),
+    };
+    const response = await fetch(surveyUrl + "getUser", requestOptions);
+    const responseJson = handleResponse(response);
+    console.log(responseJson);
+    return responseJson;
+}
 
 function handleResponse(response) {
     return response.text().then((text) => {

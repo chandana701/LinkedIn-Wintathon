@@ -15,13 +15,15 @@ import {
   Col
 } from "reactstrap";
 // core components
+import { getUser } from "../../assets/api.ts"
 import UserHeader from "../../components/Headers/UserHeader.jsx";
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: ''
+      userName: '',
+      profileData: {}
     }
   }
 
@@ -31,6 +33,13 @@ class Profile extends React.Component {
     this.setState({
       userName: params.get("userName")
     })
+    getUser(params.get("userName")).then(response => {
+      console.log(response)
+      this.setState({
+        profileData: response.userProfile,
+      })
+    })
+
   }
 
   render() {

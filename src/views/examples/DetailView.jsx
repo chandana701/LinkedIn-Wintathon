@@ -1,20 +1,12 @@
 import React from "react";
-import { Modal, ModalBody, ModalHeader } from "shards-react";
-// reactstrap components
+
 import {
-  // Badge,
   Card,
   CardHeader,
   CardFooter,
-  // DropdownMenu,
-  // DropdownItem,
-  // UncontrolledDropdown,
-  // DropdownToggle,
-  // Media,
   Pagination,
   PaginationItem,
   PaginationLink,
-  // Progress,
   Table,
   Container,
   Row,
@@ -22,184 +14,216 @@ import {
 } from "reactstrap";
 // core components
 import Header from "../../components/Headers/Header.jsx";
-
-import FusionChart from "../Lang"
+import { getUser } from "../../assets/api.ts"
 
 class Tables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      profileData: [],
+      userName: "",
+      compareValue: "",
+      data: {
+        "general": [
+          {
+            "name": "Name",
+            "index": "name",
+            "type": "text"
+          },
+          {
+            "name": "Company",
+            "index": "company",
+            "type": "text"
+          },
+          {
+            "name": "Collage",
+            "index": "collage",
+            "type": "text"
+          },
+          {
+            "name": "Designation",
+            "index": "designation",
+            "type": "text"
+          },
+          {
+            "name": "Current Salary",
+            "index": "salary",
+            "type": "number"
+          }
+        ],
+        "tech": [
+          {
+            "name": "Java",
+            "index": "java",
+            "type": "number"
+          },
+          {
+            "name": "Python",
+            "index": "python",
+            "type": "number"
+          },
+          {
+            "name": "SQL",
+            "index": "sql",
+            "type": "number"
+          },
+        ],
+        "other": [
+          {
+            "name": "Projects",
+            "index": "projects",
+            "type": "number"
+          },
+          {
+            "name": "References",
+            "index": "references",
+            "type": "number"
+          },
+          {
+            "name": "Certifications",
+            "index": "certifications",
+            "type": "number"
+          }
+        ]
+      }
+
     }
   }
-  changeState = () => {
+
+  addTostate = (event) => {
     this.setState({
-      open: !this.state.open
+      compareValue: event.target.value
     })
+  }
+  compare = () => {
+    getUser(this.state.compareValue).then(response => {
+      if (response.ok) {
+        var data = this.state.profileData
+        data.push(response.userProfile)
+        console.log(data)
+        this.setState({
+          profileData: data,
+        })
+      }
+    })
+  }
+
+  componentDidMount = () => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    this.setState({
+      userName: params.get("userName")
+    })
+    getUser(params.get("userName")).then(response => {
+      var data = []
+      data.push(response.userProfile)
+      this.setState({
+        profileData: data,
+      })
+    })
+  }
+
+  getProfilePic = () => {
+    const res = (<th scope="row" >
+      <img
+        alt="..."
+        className="rounded-circle"
+        src={require("../../assets/img/theme/team-3-800x800.jpg")}
+        style={{ width: "30px", height: "30px" }}
+      />
+    </th >)
+
+    console.log(res)
+    return res
+  }
+
+  buildDetailView = (obj, index, type) => {
+
+    var str = (type === "tech" ? "Years" : "");
+
+    const res = (
+      <tr>
+        <td>{obj["name"]}</td>
+        {
+          Object.values(this.state.profileData).map((obj2) => {
+            return <td>{obj2[type][obj["index"]] + " " + str}</td>
+          })
+        }
+      </tr>
+    )
+    return res
+
   }
 
 
   render() {
+
     return (
       <>
 
-        <Modal open={this.state.open} toggle={this.changeState}>
-          <ModalHeader>Statistics</ModalHeader>
-          <ModalBody>
-            <FusionChart />
-          </ModalBody>
-        </Modal>
 
         <Header />
-        {/* Page content */}
-        <Container className="mt--7" fluid>
-          {/* Table */}
-          <Row>
+
+        < Container className="mt--7" fluid >
+          < Row >
             <div className="col">
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <h3 className="mb-0">Card tables</h3>
+                  <table align='right'>
+                    <tr>
+                      <td><input type="text" placeholder="Compare..." style={{ padding: "6px 15px", border: "2px solid #1D9ED3", borderRadius: "10px" }} value={this.state.compareValue} onChange={this.addTostate}></input></td>
+                      <td> <input type="button" value="&#43;" style={{ padding: "0.5px 7px", border: "2px solid #1D9ED3", borderRadius: "10px", cursor: "pointer", fontSize: "24px", color: "white", backgroundColor: "#1D9ED3" }} onClick={this.compare}></input></td>
+                    </tr>
+                  </table>
                 </CardHeader>
                 <Table className="align-items-center table-flush" responsive>
-                  <thead className="thead-light">
-                    {/* <tr>
-                      <th scope="col"></th>
-                      <th scope="col">Profile</th>
-                      <th scope="col">Company</th>
-                      <th scope="col">Current Salary</th>
-                      <th scope="col">Score</th>
-                      <th scope="col" />
-                    </tr> */}
-                  </thead>
+
                   <tbody>
                     <tr>
-
                       <td></td>
-                      <th scope="row">
-                        <img
-                          alt="..."
-                          className="rounded-circle"
-                          src={require("../../assets/img/theme/team-3-800x800.jpg")}
-                          style={{ width: "30px", height: "30px" }}
-                        />
-                      </th>
-
+                      {
+                        Object.values(this.state.profileData).map((obj) => {
+                          return this.getProfilePic()
+                        })
+                      }
                     </tr>
 
                     <tr>
                       <th style={{ fontSize: "15px" }}>General Information</th>
                     </tr>
-
-                    <tr>
-                      <td>Name</td>
-                      <td>Hemanth</td>
-                    </tr>
-                    <tr>
-                      <td>Company</td>
-                      <td>SG</td>
-                    </tr>
-                    <tr>
-                      <td>Designation</td>
-                      <td>SG</td>
-                    </tr>
-                    <tr>
-                      <td>Current Salary</td>
-                      <td>SG</td>
-                    </tr>
+                    {
+                      Object.values(this.state.data["general"]).map((obj, index) => {
+                        return this.buildDetailView(obj, false, "general")
+                      })
+                    }
 
                     <tr>
                       <th style={{ fontSize: "15px" }}>Technologies</th>
                     </tr>
 
-                    <tr>
-                      <td>Java</td>
-                      <td>2 Years</td>
-                    </tr>
-                    <tr>
-                      <td>Python</td>
-                      <td>5 Years</td>
-                    </tr>
-
+                    {
+                      Object.values(this.state.data["tech"]).map((obj, index) => {
+                        return this.buildDetailView(obj, false, "tech")
+                      })
+                    }
                     <tr>
                       <th style={{ fontSize: "15px" }}>Other Information</th>
                     </tr>
-                    <tr>
-                      <td>Total Projects</td>
-                      <td>2 Years</td>
-                    </tr>
-                    <tr>
-                      <td>No.Of References</td>
-                      <td>5 Years</td>
-                    </tr>
-                    <tr>
-                      <td>Certifications</td>
-                      <td>5 Years</td>
-                    </tr>
-                    <tr>
-                      <td>Current Domian</td>
-                      <td>5 Years</td>
-                    </tr>
-
+                    {
+                      Object.values(this.state.data["other"]).map((obj, index) => {
+                        return this.buildDetailView(obj, false, "other")
+                      })
+                    }
 
                   </tbody>
                 </Table>
-                <CardFooter className="py-4">
-                  <nav aria-label="...">
-                    <Pagination
-                      className="pagination justify-content-end mb-0"
-                      listClassName="justify-content-end mb-0"
-                    >
-                      <PaginationItem className="disabled">
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          tabIndex="-1"
-                        >
-                          <i className="fas fa-angle-left" />
-                          <span className="sr-only">Previous</span>
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem className="active">
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          1
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          2 <span className="sr-only">(current)</span>
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          3
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-angle-right" />
-                          <span className="sr-only">Next</span>
-                        </PaginationLink>
-                      </PaginationItem>
-                    </Pagination>
-                  </nav>
-                </CardFooter>
+
               </Card>
             </div>
-          </Row>
+          </Row >
           {/* Dark table */}
-        </Container>
+        </Container >
       </>
     );
   }

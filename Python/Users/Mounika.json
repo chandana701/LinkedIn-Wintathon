@@ -1,20 +1,20 @@
 {
   "general":{
     "name" :"Mounika",
+    "collage":"Birla Institute of Technology",
     "company" :"Udaan",
     "designation":"Software Developer",
     "salary":1800000,
     "experience": 6
   },
 "tech":{
-  "Java":2,
-  "Python":1.5,
-  "SQL" : 3,
+  "java":2,
+  "python":1.5,
+  "sql" : 3
 },
 "other":{
   "projects":	5,
   "references":6,
-  "certifications":3,
-  "domain" : 4
+  "certifications":3
 }
 }
