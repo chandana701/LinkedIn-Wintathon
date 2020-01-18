@@ -54,9 +54,19 @@ export async function getUser(userName: any) {
     return responseJson;
 }
 
+export async function getAllUsers() {
+
+    const requestOptions = {
+        method: 'GET',
+    };
+    const response = await fetch(surveyUrl + "getAllUsers", requestOptions);
+    const responseJson = handleResponse(response);
+    console.log(responseJson);
+    return responseJson;
+}
+
 function handleResponse(response: any) {
     return response.text().then((text: any) => {
-        console.log(text)
         const data = text && JSON.parse(text);
         data.ok = response.ok
         data.status = response.status
@@ -64,4 +74,3 @@ function handleResponse(response: any) {
     });
 }
 
-// export default { hello(), getMetric() };

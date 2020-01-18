@@ -11,6 +11,10 @@ import {
 // core components
 import Header from "../../components/Headers/Header.jsx";
 import { getUser } from "../../assets/api.ts"
+import Carousel, { Modal, ModalGateway } from 'react-images';
+const images = [{ src: require('../../assets/img/code/1.png') }, { src: require('../../assets/img/code/2.png') },
+{ src: require('../../assets/img/code/3.png') }];
+
 
 class Tables extends React.Component {
   constructor(props) {
@@ -133,17 +137,24 @@ class Tables extends React.Component {
     console.log(res)
     return res
   }
+  openImages = () => {
+    this.setState({
+      modalOpen: true
+    })
+  }
 
-  buildDetailView = (obj, index, type) => {
-
-    var str = (type === "tech" ? "Years" : "");
+  buildDetailView = (obj, bool, type) => {
 
     const res = (
       <tr>
         <td>{obj["name"]}</td>
         {
           Object.values(this.state.profileData).map((obj2) => {
-            return <td>{obj2[type][obj["index"]] + " " + str}</td>
+
+            if (bool) {
+              return <td><a href="#test" onClick={this.openImages}>{obj2[type][obj["index"]] + " Years"}</a></td>
+            }
+            return <td onClick={this.openImages}>{obj2[type][obj["index"]]}</td>
           })
         }
       </tr>
@@ -163,13 +174,13 @@ class Tables extends React.Component {
     return (
       <>
 
-        {/* <ModalGateway>
+        <ModalGateway>
           {this.state.modalOpen ? (
             <Modal onClose={this.toggleModal}>
               <Carousel views={images} />
             </Modal>
           ) : null}
-        </ModalGateway> */}
+        </ModalGateway>
 
 
         <Header />
@@ -214,7 +225,7 @@ class Tables extends React.Component {
 
                     {
                       Object.values(this.state.data["tech"]).map((obj, index) => {
-                        return this.buildDetailView(obj, false, "tech")
+                        return this.buildDetailView(obj, true, "tech")
                       })
                     }
                     <tr>

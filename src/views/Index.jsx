@@ -1,19 +1,19 @@
 
 import React from "react";
 // node.js library that concatenates classes (strings)
-import classnames from "classnames";
+
 // javascipt plugin for creating charts
 
 // import { Line, Bar } from "react-chartjs-2";
 // reactstrap components
 import {
-  Button,
+  // Button,
   Card,
   CardHeader,
   CardBody,
-  NavItem,
-  NavLink,
-  Nav,
+  // NavItem,
+  // NavLink,
+  // Nav,
   // Progress,
   // Table,
   Container,
@@ -30,14 +30,21 @@ import {
 // } from "../variables/charts.jsx";
 
 import Header from "../components/Headers/Header.jsx";
-
-import FusionChart from "./Salary"
+import { getUser } from "../assets/api.ts"
+import Salary from "./Salary"
 
 class Index extends React.Component {
-  state = {
-    activeNav: 1,
-    chartExample1Data: "data1"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: "",
+      profileData: {},
+      salary: {},
+      activeNav: 1,
+      chartExample1Data: "data1"
+    }
+  }
+
 
   toggleNavs = (e, index) => {
     e.preventDefault();
@@ -53,11 +60,24 @@ class Index extends React.Component {
     setTimeout(() => wow(), 1000);
     // this.chartReference.update();
   };
-  // componentWillMount() {
-  //   if (window.Chart) {
-  //     parseOptions(Chart, chartOptions());
-  //   }
-  // }
+  componentDidMount = () => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    this.setState({
+      userName: params.get("userName")
+    })
+    console.log(params.get("userName"))
+    getUser(params.get("userName")).then(response => {
+      console.log(response)
+      this.setState({
+        profileData: response.userProfile,
+        salary: response.userProfile['salary']
+      })
+      console.log(response.userProfile['salary'])
+    })
+  }
+
+
   render() {
     return (
       <>
@@ -73,10 +93,10 @@ class Index extends React.Component {
                       <h6 className="text-uppercase text-light ls-1 mb-1">
                         Overview
                       </h6>
-                      <h2 className="text-white mb-0">Sales value</h2>
+                      <h2 className="text-white mb-0">Statistical View</h2>
                     </div>
                     <div className="col">
-                      <Nav className="justify-content-end" pills>
+                      {/* <Nav className="justify-content-end" pills>
                         <NavItem>
                           <NavLink
                             className={classnames("py-2 px-3", {
@@ -102,20 +122,17 @@ class Index extends React.Component {
                             <span className="d-md-none">W</span>
                           </NavLink>
                         </NavItem>
-                      </Nav>
+                      </Nav> */}
                     </div>
                   </Row>
                 </CardHeader>
                 <CardBody>
                   {/* Chart */}
                   <div className="chart">
-                    {/* <Line
-                      data={chartExample1[this.state.chartExample1Data]}
-                      options={chartExample1.options}
-                      getDatasetAtEvent={e => console.log(e)}
-                    /> */}
-
-                    <FusionChart />
+                    <Salary
+                      salary={this.state.salary}
+                      userName={this.state.userName}
+                    />
                   </div>
                 </CardBody>
               </Card>
@@ -124,36 +141,7 @@ class Index extends React.Component {
 
             </Col>
           </Row>
-          <Row className="mt-5">
-            <Col className="mb-5 mb-xl-0" xl="8">
-              <Card className="shadow">
-                <CardHeader className="border-0">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h3 className="mb-0">Page visits</h3>
-                    </div>
-                    <div className="col text-right">
-                      <Button
-                        color="primary"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                        size="sm"
-                      >
-                        See all
-                      </Button>
-                    </div>
-                  </Row>
-                </CardHeader>
 
-              </Card>
-            </Col>
-            <Col xl="4">
-              <Card className="shadow">
-
-
-              </Card>
-            </Col>
-          </Row>
         </Container>
       </>
     );

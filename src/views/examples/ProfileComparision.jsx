@@ -6,11 +6,7 @@ import {
   Card,
   CardHeader,
   CardFooter,
-  // DropdownMenu,
-  // DropdownItem,
-  // UncontrolledDropdown,
-  // DropdownToggle,
-  // Media,
+
   Pagination,
   PaginationItem,
   PaginationLink,
@@ -22,20 +18,53 @@ import {
 } from "reactstrap";
 // core components
 import Header from "../../components/Headers/Header.jsx";
-
+import { getAllUsers } from "../../assets/api.ts"
 import FusionChart from "../Lang"
 
 class Tables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      users: null
     }
   }
   changeState = () => {
     this.setState({
       open: !this.state.open
     })
+  }
+  componentDidMount = () => {
+
+    getAllUsers().then(response => {
+      console.log(response)
+      this.setState({
+        users: response.data,
+      })
+
+      console.log(response.data)
+    })
+
+  }
+  buildUserObject = (obj, bool, index) => {
+    const Event = (
+      <tr>
+        <td><a href={"/admin/user-profile?userName=" + obj["name"]}>{obj["name"]}</a></td>
+        <th scope="row">
+          <img
+            alt="..."
+            className="rounded-circle"
+            src={require("../../assets/img/theme/team-3-800x800.jpg")}
+            style={{ width: "30px", height: "30px" }}
+          />
+        </th>
+        <td>{obj["company"]}</td>
+        <td>{obj["salary"]}</td>
+        <td>{obj["score"]}</td>
+      </tr>
+    )
+
+    return Event
   }
 
 
@@ -72,48 +101,12 @@ class Tables extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><a href={"/admin/user-profile?userName=Mounika"}>Mounika</a></td>
-                      <th scope="row">
-                        <img
-                          alt="..."
-                          className="rounded-circle"
-                          src={require("../../assets/img/theme/team-3-800x800.jpg")}
-                          style={{ width: "30px", height: "30px" }}
-                        />
-                      </th>
-                      <td>Societe Generale</td>
-                      <td>18,50,000.00</td>
-                      <td>78</td>
-                    </tr>
-                    <tr>
-                      <td>Hemanth</td>
-                      <th scope="row">
-                        <img
-                          alt="..."
-                          className="rounded-circle"
-                          src={require("../../assets/img/theme/team-3-800x800.jpg")}
-                          style={{ width: "30px", height: "30px" }}
-                        />
-                      </th>
-                      <td>Societe Generale</td>
-                      <td>18,50,000.00</td>
-                      <td>78</td>
-                    </tr>
-                    <tr>
-                      <td>Hemanth</td>
-                      <th scope="row">
-                        <img
-                          alt="..."
-                          className="rounded-circle"
-                          src={require("../../assets/img/theme/team-3-800x800.jpg")}
-                          style={{ width: "30px", height: "30px" }}
-                        />
-                      </th>
-                      <td>Societe Generale</td>
-                      <td>18,50,000.00</td>
-                      <td>78</td>
-                    </tr>
+
+                    {
+                      this.state.users !== null ? Object.values(this.state.users).map((obj, index) => {
+                        return this.buildUserObject(obj, false, index)
+                      }) : ""
+                    }
 
                   </tbody>
                 </Table>

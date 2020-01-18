@@ -11,7 +11,7 @@ import FusionCharts from "fusioncharts";
 
 // Include the chart type
 import Column2D from "fusioncharts/fusioncharts.charts";
-
+import { getUser } from "../assets/api.ts"
 // Include the theme as fusion
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
@@ -19,82 +19,58 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 
-// STEP 2 - Chart Data
-const chartData = [
-    {
-        label: "2005",
-        value: "10"
-    },
-    {
-        label: "2006",
-        value: "15"
-    },
-    {
-        label: "2007",
-        value: "20"
-    },
-    {
-        label: "2008",
-        value: "30"
-    },
-    {
-        label: "2009",
-        value: "60"
-    },
-    {
-        label: "2010",
-        value: "80"
-    },
-    {
-        label: "2011",
-        value: "90"
-    },
-    {
-        label: "2012",
-        value: "90.8"
-    },
-    {
-        label: "2013",
-        value: "91.16"
-    },
-    {
-        label: "2014",
-        value: "91.37"
-    },
-    {
-        label: "2015",
-        value: "91.66"
-    },
-    {
-        label: "2016",
-        value: "91.8"
-    }
-];
 
-// STEP 3 - Creating the JSON object to store the chart configurations
-const chartConfigs = {
-    type: "line", // The chart type
-    width: "700", // Width of the chart
-    height: "400", // Height of the chart
-    dataFormat: "json", // Data type
-    dataSource: {
-        // Chart Configuration
-        chart: {
-            caption: "Salary Graph",
-            subCaption: "In MMbbl = One Million barrels",
-            xAxisName: "Country",
-            yAxisName: "Reserves (MMbbl)",
-            theme: "fusion"
-        },
-        // Chart Data
-        data: chartData
-    }
-};
 
 // STEP 4 - Creating the DOM element to pass the react-fusioncharts component
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSource: {
+                chart: {
+                    caption: "Salary Graph",
+                    subCaption: "In MMbbl = One Million barrels",
+                    xAxisName: "Country",
+                    yAxisName: "Reserves (MMbbl)",
+                    theme: "fusion"
+                },
+                // Chart Data
+                data: []
+            }
+        }
+    }
+    componentDidMount = () => {
+        const search = window.location.search;
+        const params = new URLSearchParams(search);
+        getUser(params.get("userName")).then(response => {
+            const data = []
+            Object.keys(response.userProfile['salary']).map((obj, index) => {
+                const val = {
+                    label: obj,
+                    value: response.userProfile['salary'][obj]
+                }
+                data.push(val)
+                return ""
+            })
+            let datasource = this.state.dataSource
+            datasource.data = data
+            console.log(datasource)
+            this.setState({
+                datasource: datasource,
+            })
+        })
+    }
+
     render() {
-        return (<ReactFC {...chartConfigs} />);
+        return (<ReactFC
+
+            type="Line"
+            width="700"
+            height="400"
+            dataFormat="json"
+            dataSource={this.state.dataSource}
+        />);
     }
 }
 

@@ -8,6 +8,7 @@ import Tables from "./views/examples/Tables.jsx";
 import ProfileComparision from "./views/examples/ProfileComparision.jsx";
 import DetailView from "./views/examples/DetailView.jsx";
 import Metrics from "./views/examples/Metrics.jsx";
+import Github from "./views/examples/Github.jsx";
 
 var routes = [
   {
@@ -15,6 +16,13 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: Index,
+    layout: "/admin"
+  },
+  {
+    path: "/git",
+    name: "Github",
+    icon: "ni ni-tv-2 text-primary",
+    component: Github,
     layout: "/admin"
   },
   {

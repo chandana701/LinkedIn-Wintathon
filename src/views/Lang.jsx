@@ -20,59 +20,126 @@ import { Col, FormRadio, } from "shards-react";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 // STEP 2 - Chart Data
-const chartData = [
-    {
-        label: "Apache",
-        value: "32647479"
-    },
-    {
-        label: "Microsoft",
-        value: "22100932"
-    },
-    {
-        label: "Zeus",
-        value: "14376"
-    },
-    {
-        label: "Other",
-        value: "18674221"
-    }
-]
+// const chartData = [
+//     {
+//         label: "Apache",
+//         value: "32647479"
+//     },
+//     {
+//         label: "Microsoft",
+//         value: "22100932"
+//     },
+//     {
+//         label: "Zeus",
+//         value: "14376"
+//     },
+//     {
+//         label: "Other",
+//         value: "18674221"
+//     }
+// ]
 // STEP 3 - Creating the JSON object to store the chart configurations
-const chartConfigs = {
-    type: "pie2d", // The chart type
-    width: "400", // Width of the chart
-    height: "300", // Height of the chart
-    dataFormat: "json", // Data type
-    dataSource: {
-        // Chart Configuration
-        chart: {
-            caption: "Market Share of Web Servers",
-            plottooltext: "<b>$percentValue</b> of web servers run on $label servers",
-            showlegend: "1",
-            showpercentvalues: "1",
-            legendposition: "bottom",
-            usedataplotcolorforlabels: "1",
-            theme: "fusion"
-        },
-        // Chart Data
-        data: chartData
-    }
-};
+// const chartConfigs = {
+//     type: "pie2d", // The chart type
+//     width: "400", // Width of the chart
+//     height: "300", // Height of the chart
+//     dataFormat: "json", // Data type
+//     dataSource: {
+//         // Chart Configuration
+//         chart: {
+//             caption: "Market Share of Web Servers",
+//             plottooltext: "<b>$percentValue</b> of web servers run on $label servers",
+//             showlegend: "1",
+//             showpercentvalues: "1",
+//             legendposition: "bottom",
+//             usedataplotcolorforlabels: "1",
+//             theme: "fusion"
+//         },
+//         // Chart Data
+//         data: []
+//     }
+// };
 
 // STEP 4 - Creating the DOM element to pass the react-fusioncharts component
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            viewType: "total",
+            dataSource: {
+                // Chart Configuration
+                chart: {
+                    caption: "Market Share of Web Servers",
+                    plottooltext: "<b>$percentValue</b> of web servers run on $label servers",
+                    showlegend: "1",
+                    showpercentvalues: "1",
+                    legendposition: "bottom",
+                    usedataplotcolorforlabels: "1",
+                    theme: "fusion"
+                },
+                // Chart Data
+                data: []
+            }
+        }
+    }
+    componentDidMount = () => {
+        console.log(this.props.techStack)
+        const data = []
+        Object.keys(this.props.techStack["total"]).map((obj, index) => {
+            const val = {
+                label: obj,
+                value: this.props.techStack["total"][obj]
+            }
+            data.push(val)
+            return ""
+        })
+        let datasource = this.state.dataSource
+        datasource.data = data
+        console.log(datasource)
+        this.setState({
+            datasource: datasource,
+
+        })
+    }
+
+    addToState = (event) => {
+        let datasource = this.state.dataSource
+        const data = []
+        if (event.target.name === "tech") {
+            Object.keys(this.props.techStack[event.target.value]).map((obj, index) => {
+                const val = {
+                    label: obj,
+                    value: this.props.techStack[event.target.value][obj]
+                }
+                data.push(val)
+                return ""
+            })
+
+            datasource.data = data
+            this.setState({
+                datasource: datasource,
+                viewType: event.target.value
+            })
+        }
+    }
+
     render() {
         return (
-
             <div>
-                <ReactFC {...chartConfigs} />
+                <ReactFC
+
+                    type="pie2d"
+                    width="400"
+                    height="300"
+                    dataFormat="json"
+
+                    dataSource={this.state.dataSource}
+                />
 
                 <Col sm="12" md="8" className="mb-3 ml-4" width={400}>
                     <fieldset>
-                        <FormRadio inline value="total"  >Total</FormRadio>
-                        <FormRadio inline value="Male">Male</FormRadio>
-                        <FormRadio inline value="Female"> Female</FormRadio>
+                        <FormRadio inline value="total" name='tech' checked={this.state.viewType === "total"} onChange={this.addToState}>Total</FormRadio>
+                        <FormRadio inline value="personal" name='tech' checked={this.state.viewType === "personal"} onChange={this.addToState}>Personal</FormRadio>
                     </fieldset>
                 </Col>
             </div>

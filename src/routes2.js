@@ -33,8 +33,8 @@ var routes = [
   // },
   {
     path: "/ProfileComparision",
-    name: "ProfileComparision",
-    icon: "ni ni-bullet-list-67 text-red",
+    name: "Profiles",
+    icon: "ni ni-tv-2 text-primary",
     component: ProfileComparision,
     layout: "/admin"
   },
