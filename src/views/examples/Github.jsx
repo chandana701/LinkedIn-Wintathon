@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import ReactGithubCalendar from '@axetroy/react-github-calendar';
+import ReactGithubCalendar from 'react-github-calendar';
+import {
+
+  Card,
+
+} from "reactstrap";
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        hello world
-        <ReactGithubCalendar name="axetroy" />
+        <Card className="shadow">
+          <ReactGithubCalendar username={this.props.userName} />
+        </Card>
       </div>
 
     );

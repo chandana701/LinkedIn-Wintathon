@@ -21,6 +21,9 @@ import {
   Col
 } from "reactstrap";
 
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
+
 // core components
 // import {
 //   chartOptions,
@@ -32,16 +35,20 @@ import {
 import Header from "../components/Headers/Header.jsx";
 import { getUser } from "../assets/api.ts"
 import Salary from "./Salary"
+import Github from "./examples/Github"
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userName: "",
+      gitName: "",
       profileData: {},
       salary: {},
       activeNav: 1,
-      chartExample1Data: "data1"
+      chartExample1Data: "data1",
+      drop: false,
+      graphType: "salary"
     }
   }
 
@@ -71,14 +78,35 @@ class Index extends React.Component {
       console.log(response)
       this.setState({
         profileData: response.userProfile,
-        salary: response.userProfile['salary']
+        salary: response.userProfile['salary'],
+        gitName: response.userProfile['general']['git']
       })
       console.log(response.userProfile['salary'])
     })
   }
-
+  toggle = () => {
+    this.setState({
+      drop: !this.state.drop
+    })
+  }
+  changeGraph = (event) => {
+    this.setState({
+      graphType: event.target.value
+    })
+  }
 
   render() {
+    var graph = ""
+    if (this.state.graphType === "salary") {
+      graph = (<Salary
+        salary={this.state.salary}
+        userName={this.state.userName}
+      />)
+    }
+    if (this.state.graphType === "git") {
+      graph = (<Github
+        userName={this.state.gitName} />)
+    }
     return (
       <>
         <Header />
@@ -90,12 +118,19 @@ class Index extends React.Component {
                 <CardHeader className="bg-transparent">
                   <Row className="align-items-center">
                     <div className="col">
-                      <h6 className="text-uppercase text-light ls-1 mb-1">
-                        Overview
-                      </h6>
                       <h2 className="text-white mb-0">Statistical View</h2>
                     </div>
                     <div className="col">
+                      <Dropdown isOpen={this.state.drop} toggle={this.toggle}>
+                        <DropdownToggle caret>
+                          Dropdown</DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem onClick={this.changeGraph} value="salary">Salary</DropdownItem>
+                          <DropdownItem onClick={this.changeGraph} value="git">Github</DropdownItem>
+
+                        </DropdownMenu>
+                      </Dropdown>
+
                       {/* <Nav className="justify-content-end" pills>
                         <NavItem>
                           <NavLink
@@ -127,12 +162,8 @@ class Index extends React.Component {
                   </Row>
                 </CardHeader>
                 <CardBody>
-                  {/* Chart */}
                   <div className="chart">
-                    <Salary
-                      salary={this.state.salary}
-                      userName={this.state.userName}
-                    />
+                    {graph}
                   </div>
                 </CardBody>
               </Card>
