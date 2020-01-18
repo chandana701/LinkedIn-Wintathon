@@ -28,11 +28,6 @@ class Tables extends React.Component {
       data: {
         "general": [
           {
-            "name": "Name",
-            "index": "name",
-            "type": "text"
-          },
-          {
             "name": "Company",
             "index": "company",
             "type": "text"

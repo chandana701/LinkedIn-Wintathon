@@ -10,27 +10,27 @@ import DetailView from "./views/examples/DetailView.jsx";
 import Metrics from "./views/examples/Metrics.jsx";
 
 var routes = [
-  {
-    path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: Index,
-    layout: "/admin"
-  },
-  {
-    path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: Profile,
-    layout: "/admin"
-  },
-  {
-    path: "/tables",
-    name: "Tables",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/index",
+  //   name: "Dashboard",
+  //   icon: "ni ni-tv-2 text-primary",
+  //   component: Index,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/user-profile",
+  //   name: "User Profile",
+  //   icon: "ni ni-single-02 text-yellow",
+  //   component: Profile,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/tables",
+  //   name: "Tables",
+  //   icon: "ni ni-bullet-list-67 text-red",
+  //   component: Tables,
+  //   layout: "/admin"
+  // },
   {
     path: "/ProfileComparision",
     name: "ProfileComparision",
@@ -38,20 +38,13 @@ var routes = [
     component: ProfileComparision,
     layout: "/admin"
   },
-  {
-    path: "/projects",
-    name: "Projects",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: Projects,
-    layout: "/admin"
-  },
-  {
-    path: "/detailView",
-    name: "DetailView",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: DetailView,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/detailView",
+  //   name: "DetailView",
+  //   icon: "ni ni-bullet-list-67 text-red",
+  //   component: DetailView,
+  //   layout: "/admin"
+  // },
   {
     path: "/metrics",
     name: "Metrics",
@@ -59,8 +52,6 @@ var routes = [
     component: Metrics,
     layout: "/admin"
   },
-
-
   {
     path: "/login",
     name: "Login",
@@ -68,6 +59,7 @@ var routes = [
     component: Login,
     layout: "/auth"
   },
+
   {
     path: "/register",
     name: "Register",

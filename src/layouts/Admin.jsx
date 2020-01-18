@@ -25,6 +25,7 @@ import AdminFooter from "../components/Footers/AdminFooter.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 
 import routes from "../routes.js";
+import routes2 from "../routes2.js";
 
 class Admin extends React.Component {
   componentDidUpdate(e) {
@@ -64,10 +65,10 @@ class Admin extends React.Component {
       <>
         <Sidebar
           {...this.props}
-          routes={routes}
+          routes={routes2}
           logo={{
             innerLink: "/admin/index",
-            imgSrc: require("../assets/img/brand/argon-react.png"),
+            imgSrc: require("../assets/img/brand/linkedin.png"),
             imgAlt: "..."
           }}
         />
