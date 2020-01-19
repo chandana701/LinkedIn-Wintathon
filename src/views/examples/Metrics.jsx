@@ -33,7 +33,7 @@ class Tables extends React.Component {
             "type": "text"
           },
           {
-            "name": "Collage",
+            "name": "College",
             "index": "collage",
             "type": "text"
           },
